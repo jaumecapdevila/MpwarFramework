@@ -6,7 +6,8 @@
   "homepage": "https://github.com/jaumecapdevila/MpwarFramework",
   "type": "project",
   "require": {
-    "php": ">=5.5.30"
+    "php": ">=5.5.30",
+    "symfony/yaml": "2.8"
   },
   "minimum-stability": "dev",
   "autoload": {
@@ -15,5 +16,3 @@
     }
   }
 }
-
-
