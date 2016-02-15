@@ -1,0 +1,19 @@
+{
+  "name": "jaumecapdevila/MpwarFramework",
+  "description": "MPWAR Framework",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "homepage": "https://github.com/jaumecapdevila/MpwarFramework",
+  "type": "project",
+  "require": {
+    "php": ">=5.5.30"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "MpwarFramework\\": "src/MpwarFramework/"
+    }
+  }
+}
+
+
