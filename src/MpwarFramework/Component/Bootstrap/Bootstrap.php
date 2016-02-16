@@ -7,6 +7,5 @@ class Bootstrap
 {
     public function __construct()
     {
-        echo "We are in ;)";
     }
 }
