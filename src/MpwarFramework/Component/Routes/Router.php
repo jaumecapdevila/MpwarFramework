@@ -6,18 +6,18 @@ use MpwarFramework\Component\Routes\readerFactory;
 
 class Router
 {
-    private $readMethod;
-    private $pathToRoutesFile;
+    private $fileExtension;
+    private $pathToFile;
 
-    public function __construct($readMethod,$pathToRoutesFile)
+    public function __construct($fileExtension,$pathToFile)
     {
-        $this->pathToRoutesFile = $pathToRoutesFile;
-        $this->readMethod = $readMethod;
+        $this->pathToFile = $pathToFile;
+        $this->fileExtension = $fileExtension;
     }
 
     public function matchRoute(Request $request)
     {
-        $reader =  readerFactory::instantiateReader($this->readMethod,$this->pathToRoutesFile);
+        $reader =  readerFactory::instantiateReader($this->fileExtension,$this->pathToFile);
         $routes = $reader->readFile();
 
         foreach ($routes as $route) {

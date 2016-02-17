@@ -6,7 +6,7 @@ class readerFactory
 {
     static function instantiateReader($type,$fileToRead) {
         switch ($type) {
-            case 'yaml':
+            case 'yml':
                     return new yamlFileReader($fileToRead);
                 break;
             case 'xml':

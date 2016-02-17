@@ -3,7 +3,6 @@
 
 namespace MpwarFramework\Component\Routes;
 
-
 class Dispatcher
 {
     private $router;
