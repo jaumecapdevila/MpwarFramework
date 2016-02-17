@@ -4,8 +4,11 @@ namespace MpwarFramework\Component\Bootstrap;
 
 
 class Bootstrap
-{
-    public function __construct()
+{   
+    private $environment;
+
+    public function __construct($environment)
     {
+        $this->environment = $environment;
     }
 }
