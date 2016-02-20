@@ -2,7 +2,6 @@
 
 namespace MpwarFramework\Component\Routes;
 
-
 class Request
 {
     private $method;
@@ -11,7 +10,7 @@ class Request
     private $cookies;
     private $server;
 
-    function __construct($method,$path)
+    function __construct($method, $path)
     {
         $this->method = $method;
         $this->path = $path;
@@ -29,15 +28,18 @@ class Request
     {
         return $this->path;
     }
+
     function getSession()
     {
         return $this->session;
     }
+
     function getCookies()
     {
         return $this->session;
     }
-    function getSever () 
+
+    function getSever()
     {
         return $this->server;
     }
