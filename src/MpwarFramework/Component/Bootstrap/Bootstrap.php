@@ -18,10 +18,9 @@ class Bootstrap
         $this->fileExtension = $fileExtension;
     }
 
-    public function execute () {
+    public function execute (Request $request) {
         $router = new Router($this->fileExtension,'../app/Routing.'.$this->fileExtension);
         $dispatcher = new Dispatcher($router);
-        $dispatcher->handle(new Request('GET', '/'));
-        $dispatcher->handle(new Request('GET', '/users'));
+        $dispatcher->handle($request);
     }
 }
