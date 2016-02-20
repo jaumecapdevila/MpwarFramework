@@ -7,20 +7,29 @@ use MpwarFramework\Component\Routes\Router;
 use MpwarFramework\Component\Routes\Dispatcher;
 use MpwarFramework\Component\Routes\Request;
 
+
 class Bootstrap
-{   
+{
     private $environment;
     private $fileExtension;
 
-    public function __construct($environment,$fileExtension)
+    public function __construct($environment, $fileExtension)
     {
         $this->environment = $environment;
         $this->fileExtension = $fileExtension;
     }
 
-    public function execute (Request $request) {
-        $router = new Router($this->fileExtension,'../app/Routing.'.$this->fileExtension);
+    public function execute(Request $request)
+    {
+        $router = new Router($this->fileExtension, '../app/Routing.' . $this->fileExtension);
         $dispatcher = new Dispatcher($router);
-        $dispatcher->handle($request);
+        $controllerInfo = $dispatcher->handle($request);
+        if (!$controllerInfo) {
+            echo "Route not found";
+        } else {
+            $controllerPath = 'MpwarApp\\' . $controllerInfo[0] . '\\Controller\\' . $controllerInfo[1];
+            $controller  = new $controllerPath();
+            $controller->$controllerInfo[2]();
+        }
     }
 }

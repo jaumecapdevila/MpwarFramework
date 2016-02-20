@@ -14,7 +14,7 @@ class Dispatcher
 
     public function handle(Request $request)
     {
-        $this->router->matchRoute($request);
+        return $this->router->matchRoute($request);
     }
 }
 
