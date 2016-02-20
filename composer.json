@@ -8,7 +8,10 @@
   "require": {
     "php": ">=5.5.30",
     "symfony/yaml": "2.8",
-    "symfony/dom-crawler": "2.8"
+    "symfony/dom-crawler": "2.8",
+    "twig/twig": "24.0",
+    "smarty/smarty":"1.29"
+
   },
   "minimum-stability": "dev",
   "autoload": {
