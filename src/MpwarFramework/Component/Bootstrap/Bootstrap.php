@@ -28,7 +28,7 @@ class Bootstrap
             echo "Route not found";
         } else {
             $controllerPath = 'MpwarApp\\' . $controllerInfo[0] . '\\Controller\\' . $controllerInfo[1];
-            $controller  = new $controllerPath();
+            $controller = new $controllerPath();
             $controller->$controllerInfo[2]();
         }
     }
