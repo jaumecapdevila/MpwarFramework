@@ -4,15 +4,12 @@ namespace MpwarFramework\Component\Controller;
 
 use MpwarFramework\Component\Response\responseFactory;
 use MpwarFramework\Component\Routes\Request;
+use MpwarFramework\Component\Templating\FileLoader;
 
 abstract class Controller
 {
-    public function getHTMLResponse()
-    {
-        responseFactory::generateResponse("html");
-    }
-    public function getJSONResponse()
-    {
-        responseFactory::generateResponse("html");
+    public function renderFile($fileToRender) {
+        $fileLoader = new FileLoader($fileToRender);
+        $fileLoader->renderWithAdequateTemplate();
     }
 }
