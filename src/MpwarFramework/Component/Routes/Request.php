@@ -14,8 +14,8 @@ class Request
     {
         $this->method = $method;
         $this->path = $path;
-        $this->session = $_SESSION;
-        $this->cookies = $_COOKIES;
+        $this->session = $this->setSession();
+        $this->cookies = $_COOKIE;
         $this->server = $_SERVER;
     }
 
@@ -42,5 +42,8 @@ class Request
     function getSever()
     {
         return $this->server;
+    }
+    function setSession () {
+        return session_status() === PHP_SESSION_ACTIVE ? $_SESSION : FALSE;
     }
 }

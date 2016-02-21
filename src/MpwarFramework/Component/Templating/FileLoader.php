@@ -1,8 +1,7 @@
 <?php
 
 namespace MpwarFramework\Component\Templating;
-define('SMARTY_DIR', '..//vendor/smarty/libs/');
-require_once(SMARTY_DIR . 'Smarty.class.php');
+
 
 
 class FileLoader
