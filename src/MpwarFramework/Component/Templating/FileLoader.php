@@ -2,7 +2,6 @@
 
 namespace MpwarFramework\Component\Templating;
 
-
 class FileLoader
 {
     private $fileToRender;
@@ -19,9 +18,12 @@ class FileLoader
         if ($fileInformation["extension"] == "twig") {
             $loader = new \Twig_Loader_Filesystem($fileInformation["path"]);
             $twig = new \Twig_Environment($loader, ['debug' => true]);
-            echo $twig->render($fileInformation["name"],$params);
+            echo $twig->render($fileInformation["name"], $params);
         } else {
-
+            $smarty = new \Smarty();
+            $smarty->setTemplateDir($fileInformation["path"]);
+            $smarty->assign('Params',$params);
+            $smarty->display('users.tpl');
         }
     }
 
