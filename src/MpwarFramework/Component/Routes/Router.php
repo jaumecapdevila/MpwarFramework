@@ -3,6 +3,7 @@
 namespace MpwarFramework\Component\Routes;
 
 use MpwarFramework\Component\Routes\readerFactory;
+use MpwarFramework\Component\Request\Request;
 
 class Router
 {
@@ -23,7 +24,8 @@ class Router
             if ($this->validRoute($route, $request->getPath())) {
                 $params = $this->checkRouteParams($route, $request->getPath());
                 $routeInformation["params"] = $params;
-                $routeInformation["controller"] = $this->getControllerInformation($route["defaults"]);
+                $routeInformation["controller"] = $route["controller"];
+                $routeInformation["action"] = $route["action"];
                 return $routeInformation;
             }
         }

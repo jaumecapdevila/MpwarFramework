@@ -2,10 +2,9 @@
 
 namespace MpwarFramework\Component\Bootstrap;
 
-use MpwarFramework\Component\Routes\yamlFileReader;
 use MpwarFramework\Component\Routes\Router;
 use MpwarFramework\Component\Routes\Dispatcher;
-use MpwarFramework\Component\Routes\Request;
+use MpwarFramework\Component\Request\Request;
 
 
 class Bootstrap
@@ -27,9 +26,8 @@ class Bootstrap
         if (!$controllerInfo) {
             echo "Route not found";
         } else {
-            $controllerPath = 'MpwarApp\\' . $controllerInfo["controller"][0] . '\\Controller\\' .  $controllerInfo["controller"][1];
-            $controller = new $controllerPath();
-            $controller-> $controllerInfo["controller"][2]($controllerInfo["params"]);
+            $controller = new $controllerInfo["controller"]();
+            $controller-> $controllerInfo["action"]($controllerInfo["params"]);
         }
     }
 }

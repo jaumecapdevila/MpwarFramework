@@ -2,6 +2,7 @@
 
 
 namespace MpwarFramework\Component\Routes;
+use MpwarFramework\Component\Request\Request;
 
 class Dispatcher
 {
