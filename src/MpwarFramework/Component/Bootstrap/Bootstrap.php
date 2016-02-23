@@ -5,6 +5,7 @@ namespace MpwarFramework\Component\Bootstrap;
 use MpwarFramework\Component\Routes\Router;
 use MpwarFramework\Component\Routes\Dispatcher;
 use MpwarFramework\Component\Request\Request;
+use MpwarFramework\Component\Response\htmlResponse;
 
 
 class Bootstrap
@@ -23,11 +24,16 @@ class Bootstrap
         $router = new Router($this->fileExtension, '../app/Routing.' . $this->fileExtension);
         $dispatcher = new Dispatcher($router);
         $controllerInfo = $dispatcher->handle($request);
+
         if (!$controllerInfo) {
-            echo "Route not found";
+            $response = new htmlResponse();
+            $response->setContent('<h1>Page not found</h1>');
+            $response->setStatusCode($response::HTTP_NOT_FOUND);
+            $response->Send();
         } else {
             $controller = new $controllerInfo["controller"]();
             $controller-> $controllerInfo["action"]($controllerInfo["params"]);
         }
     }
 }
+
