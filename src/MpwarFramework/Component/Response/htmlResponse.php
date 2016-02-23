@@ -8,26 +8,41 @@ class htmlResponse
     const HTTP_NOT_FOUND = 404;
 
     public $headers = array();
+
     protected $content;
     protected $statusCode;
-    protected $statusText;
+    protected $contentType;
 
-    public function __construct($content = '', $status = 200, $headers = array())
+    public function __construct($content = '', $status = 200, $type = "text/html", $headers = array())
     {
         $this->headers = $headers;
+        $this->contentType = $type;
         $this->setContent($content);
         $this->setStatusCode($status);
     }
 
-    public function sendContent()
+    public function Send()
+    {
+        $this->sendHeaders();
+        $this->sendContent();
+
+    }
+
+    private function sendContent()
     {
         echo $this->content;
         return $this;
     }
 
+    private function sendHeaders()
+    {
+        http_response_code($this->headers["statusCode"]);
+        header('Content-Type:'.$this->contentType);
+    }
+
     public function setContent($content)
     {
-        $this->content = (string) $content;
+        $this->content = (string)$content;
         return $this;
     }
 
@@ -38,9 +53,9 @@ class htmlResponse
 
     public function setStatusCode($code, $text = null)
     {
-        $this->statusCode = $code = (int) $code;
+        $this->statusCode = $code = (int)$code;
         $this->statusText = $text;
-
+        $this->headers["statusCode"] = $code;
         return $this;
     }
 
