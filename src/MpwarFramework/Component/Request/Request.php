@@ -10,14 +10,30 @@ class Request
     private $session;
     private $cookies;
     private $server;
+    private $get;
+    private $post;
 
-    function __construct($method, $path)
+    function __construct($cookies,$server,$post,$get)
     {
-        $this->method = $method;
-        $this->path = $path;
         $this->session = $this->setSession();
-        $this->cookies = $_COOKIE;
-        $this->server = $_SERVER;
+        $this->cookies = $cookies;
+        $this->server = $server;
+        $this->method = $this->setMethod();
+        $this->path = $this->setURI();
+        $this->get = $get;
+        $this->post = $post;
+        //Ha de rebre tots aquest parámetres per constructor, també ha de rebre les variables $_POST i $_GET
+
+    }
+
+    private function setMethod()
+    {
+        return $this->server['REQUEST_METHOD'];
+    }
+
+    private function setURI()
+    {
+        return $this->server['REQUEST_URI'];
     }
 
     function getMethod()
@@ -44,7 +60,9 @@ class Request
     {
         return $this->server;
     }
-    function setSession () {
-        return session_status() === PHP_SESSION_ACTIVE ? $_SESSION : FALSE;
+
+    function setSession()
+    {
+        return session_status() === PHP_SESSION_ACTIVE ? $_SESSION : false;
     }
 }
