@@ -37,13 +37,6 @@ class Router
         return false;
     }
 
-    private function getControllerInformation($route)
-    {
-        $controllerString = $route["_controller"];
-
-        return explode(":", $controllerString);
-    }
-
     private function validRoute($route, $requestedRoute)
     {
 
