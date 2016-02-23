@@ -22,7 +22,12 @@ class Router
         $routes = $reader->readFile();
         foreach ($routes as $route) {
             if ($this->validRoute($route, $request->getPath())) {
-                $params = $this->checkRouteParams($route, $request->getPath());
+                $params = $this->getRouteParams($route, $request->getPath());
+                if ($params === false)
+                {
+                    return false;
+                }
+                $routeInformation["route"] = $params;
                 $routeInformation["params"] = $params;
                 $routeInformation["controller"] = $route["controller"];
                 $routeInformation["action"] = $route["action"];
@@ -57,11 +62,15 @@ class Router
        return true;
     }
 
-    private function checkRouteParams($route, $requestedRoute)
+    private function getRouteParams($route, $requestedRoute)
     {
         $routeParams = array();
         $separatedRoute = explode("/", $route["path"]);
         $separatedRequestRoute = explode("/", $requestedRoute);
+        if ($this->differentPathArguments($separatedRoute,$separatedRequestRoute))
+        {
+            return false;
+        }
         $paramPosition = 0;
         foreach ($separatedRoute as $param) {
             if (strpos($param, '{') !== false) {
@@ -76,6 +85,12 @@ class Router
     private function getParamName($param)
     {
         return str_replace(str_split('{}'), '', $param);
+    }
+
+    private function differentPathArguments($separatedRoute,$separatedRequestRoute){
+        $routeNumParams = count($separatedRoute);
+        $requestedRouteNumParams = count($separatedRequestRoute);
+        return $routeNumParams != $requestedRouteNumParams;
     }
 }
 
