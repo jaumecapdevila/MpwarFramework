@@ -13,17 +13,15 @@ class Request
     private $get;
     private $post;
 
-    function __construct($cookies,$server,$post,$get)
+    function __construct()
     {
         $this->session = $this->setSession();
-        $this->cookies = $cookies;
-        $this->server = $server;
+        $this->cookies = $_COOKIE;
+        $this->server = $_SERVER;
         $this->method = $this->setMethod();
         $this->path = $this->setURI();
-        $this->get = $get;
-        $this->post = $post;
-        //Ha de rebre tots aquest parámetres per constructor, també ha de rebre les variables $_POST i $_GET
-
+        $this->get = $_GET;
+        $this->post = $_POST;
     }
 
     private function setMethod()
