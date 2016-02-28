@@ -6,6 +6,7 @@ use MpwarFramework\Component\Routes\Router;
 use MpwarFramework\Component\Routes\Dispatcher;
 use MpwarFramework\Component\Request\Request;
 use MpwarFramework\Component\Response\htmlResponse;
+use MpwarFramework\Component\ServiceContainer\ServiceContainer;
 
 
 class Bootstrap
@@ -13,26 +14,31 @@ class Bootstrap
     private $environment;
     private $fileExtension;
 
-    public function __construct($environment, $fileExtension)
+    public function __construct()
+    {
+        $this->environment = "PROD";
+        $this->fileExtension = "yml";
+        ServiceContainer::getInstance();
+    }
+
+    public function setEnvironment($environment)
     {
         $this->environment = $environment;
-        $this->fileExtension = $fileExtension;
     }
 
     public function execute(Request $request)
     {
-        $router = new Router($this->fileExtension, '../app/Routing.' . $this->fileExtension);
-        $dispatcher = new Dispatcher($router);
+        $dispatcher = ServiceContainer::getInstanceOf("Dispatcher");
         $controllerInfo = $dispatcher->handle($request);
 
         if (!$controllerInfo) {
-            $response = new htmlResponse();
+            $response = ServiceContainer::getInstanceOf("htmlResponse");
             $response->setContent('<h1>Page not found</h1>');
             $response->setStatusCode($response::HTTP_NOT_FOUND);
             $response->Send();
         } else {
             $controller = new $controllerInfo["controller"]();
-            $controller-> $controllerInfo["action"]($controllerInfo["params"]);
+            $controller->$controllerInfo["action"]($controllerInfo["params"]);
         }
     }
 }
