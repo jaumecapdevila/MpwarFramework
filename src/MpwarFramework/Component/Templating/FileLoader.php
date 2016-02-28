@@ -4,17 +4,13 @@ namespace MpwarFramework\Component\Templating;
 
 class FileLoader
 {
-    private $fileToRender;
-
-    public function __construct($fileToRender)
+    public function __construct()
     {
-        $this->fileToRender = $fileToRender;
-
     }
 
-    public function renderWithAdequateTemplate($params)
+    public function renderWithAdequateTemplate($fileToRender, $params)
     {
-        $fileInformation = $this->getFileInformation($this->fileToRender);
+        $fileInformation = $this->getFileInformation($fileToRender);
         if ($fileInformation["extension"] == "twig") {
             $loader = new \Twig_Loader_Filesystem($fileInformation["path"]);
             $twig = new \Twig_Environment($loader, ['debug' => true]);
