@@ -13,12 +13,12 @@ class htmlResponse
     protected $statusCode;
     protected $contentType;
 
-    public function __construct($content = '', $status = 200, $type = "text/html", $headers = array())
+    public function __construct()
     {
-        $this->headers = $headers;
-        $this->contentType = $type;
-        $this->setContent($content);
-        $this->setStatusCode($status);
+        $this->headers = array();
+        $this->contentType = "text/html";
+        $this->setContent("");
+        $this->setStatusCode(200);
     }
 
     public function Send()
