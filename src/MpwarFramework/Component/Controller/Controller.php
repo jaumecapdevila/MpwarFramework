@@ -7,8 +7,9 @@ use MpwarFramework\Component\Templating\FileLoader;
 
 abstract class Controller
 {
-    public function renderFile($fileToRender,$params) {
-        $fileLoader = new FileLoader($fileToRender);
-       return $fileLoader->renderWithAdequateTemplate($params);
+    public function renderFile($fileToRender, $params)
+    {
+        $fileLoader = new FileLoader();
+        return $fileLoader->renderWithAdequateTemplate($fileToRender, $params);
     }
 }
