@@ -7,7 +7,6 @@ class FileLoader
     public function __construct()
     {
     }
-
     public function renderWithAdequateTemplate($fileToRender, $params)
     {
         $fileInformation = $this->getFileInformation($fileToRender);

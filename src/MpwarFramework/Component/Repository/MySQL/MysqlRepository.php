@@ -37,15 +37,11 @@ class MysqlRepository
         try {
             $pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->password);
             $statement = $pdo->prepare($query);
-            $paramCont = 1;
             if (!is_null($values)) {
-
-                foreach ($values as $key => $value) {
-                    $statement->bindParam(':' . $key, $value);
-                    $paramCont++;
-                }
+                $statement->execute($values);
+            }else {
+                $statement->execute();
             }
-            $statement->execute();
             $queryResult = $statement->fetchAll($pdo::FETCH_ASSOC);
             return $queryResult;
 
