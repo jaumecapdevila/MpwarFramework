@@ -1,0 +1,57 @@
+Services:
+
+  FileLoader:
+    - class: MpwarFramework\Component\Templating
+    - arguments:
+    - tags: profiling
+    - public: false
+
+  Router:
+    - class: MpwarFramework\Component\Routes
+    - arguments:
+      - 'yml'
+      - '../app/Routing'
+    - tags: profiling
+    - public: false
+
+  Dispatcher:
+    - class: MpwarFramework\Component\Routes
+    - arguments:
+      - '@Router'
+    - tags: profiling
+    - public: false
+
+  Request:
+    - class: MpwarFramework\Component\Request
+    - arguments:
+    - tags:
+    - public: false
+
+  htmlResponse:
+    - class: MpwarFramework\Component\Response
+    - arguments:
+    - tags:
+    - public: false
+
+  MysqlRepository:
+      - class: MpwarFramework\Component\Repository\MySQL
+      - arguments:
+      - tags:
+      - public: false
+  PDO:
+    - class:
+    - arguments:
+    - tags:
+    - public: false
+
+  Twig:
+    - class:
+    - arguments:
+    - tags:
+    - public: false
+
+  Smarty:
+      - class:
+      - arguments:
+      - tags:
+      - public: false
